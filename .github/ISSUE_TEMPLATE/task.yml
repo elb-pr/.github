@@ -20,7 +20,17 @@ body:
   id: success
   attributes:
     label: Success criteria
-    description: How will we know this is done?
+    description: >
+      Write each criterion as an ATIR-style assertion: a concrete,
+      independently verifiable statement that is either true or false
+      at done-time. Each item must be checkable by running a command,
+      reading an output, or observing a specific behaviour — not by
+      asking "does it feel right?".
+    placeholder: |
+      - [ ] `<command>` exits 0
+      - [ ] <endpoint> returns <status> with <body shape>
+      - [ ] <observable UI or CLI behaviour>
+      - [ ] No regressions in existing test suite
   validations:
     required: true
 - type: textarea
