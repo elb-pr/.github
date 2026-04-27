@@ -59,8 +59,8 @@
 
 ## Review Gates
 
-- [ ] Spec reviewer verdict: **PASS**
-- [ ] Code reviewer verdict: **PASS** 
+- [ ] Spec review: **PASS**
+- [ ] Code review: **PASS** 
 - [ ] Human has reviewed and approved — no auto‑merge
 
 ## CI
