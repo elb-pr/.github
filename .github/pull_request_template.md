@@ -21,8 +21,8 @@
 
 ## Verification Evidence
 
-- [ ] Verified commit SHA matches 
-- [ ] File manifest hash matches 
+- [ ] Verified commit SHA matches
+- [ ] File manifest hash matches
 - [ ] Code has NOT been modified since verification ran
 
 **Evidence:**
@@ -37,7 +37,7 @@
 - [ ] Lint — 0 issues
 - [ ] Type check — 0 errors
 - [ ] Build succeeds
-- [ ] Output verified 
+- [ ] Output verified
 
 ## Documentation
 
@@ -60,10 +60,12 @@
 ## Review Gates
 
 - [ ] Spec review: **PASS**
-- [ ] Code review: **PASS** 
+- [ ] Code review: **PASS**
 - [ ] Human has reviewed and approved — no auto‑merge
 
 ## CI
 
 - [ ] All CI checks pass
 - [ ] No force push to `main` / `master` / `release`
+
+Closes #
