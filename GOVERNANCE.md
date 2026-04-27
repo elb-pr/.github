@@ -6,7 +6,7 @@ This project is maintained by [@elb-pr](https://github.com/elb-pr). All decision
 
 ## Branch Strategy
 
-- `main` — production-ready code only. Direct pushes are restricted.
+- `main` — production‑ready code only. Direct pushes are restricted.
 - `feat/<description>` — new features
 - `fix/<description>` — bug fixes
 - `chore/<description>` — maintenance, dependencies, tooling
@@ -16,7 +16,7 @@ This project is maintained by [@elb-pr](https://github.com/elb-pr). All decision
 ## Merge Strategy
 
 - Feature and fix branches: **squash merge** into `main`
-- Commit message must follow [Conventional Commits](https://www.conventionalcommits.org/): `type(scope): description`
+- Commit message must follow Conventional Commits: `type(scope): description`
 - No merge commits on `main`
 - Branches deleted after merge
 
