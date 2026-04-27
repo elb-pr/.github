@@ -1,31 +1,28 @@
 # Contributing
 
-Contributions are welcome. This document describes the full process expected of every contributor — human or agent.
+Contributions are welcome. This document describes the full process expected of every contributor.
 
-## Code Quality Standard
+---
 
-Code you write, understand fully, and can defend line by line.
+## Code Quality
 
-Acceptable if you have reviewed every line, understand what it does, it is not a naive or default implementation, and you can defend every decision if asked.
+Only submit code you have reviewed line by line, understand fully, and can defend. Naive or default implementations are not acceptable. If you cannot explain a decision, it should not be in the PR.
 
-## The Contribution Flow
+---
 
-Every non-trivial change follows this sequence. No shortcuts.
+## Workflow
 
-1. **Outline** — Open an issue or discussion first. Agree on approach before writing code. 
-2. **Execute** — One task = one branch. Two-stage review runs before any merge is offered.
-3. **Verify** — All phases must PASS. A verified commit SHA and file manifest are produced.
-4. **Ship** — The final gate. Human approves merge. No auto-merging.
+Every non-trivial change follows this sequence:
 
-## Branch Naming
+1. **Open an issue first.** Agree on scope and approach before writing code. Surprises in PRs get closed.
+2. **One branch per unit of work.** Do not bundle unrelated changes.
+3. **Open a PR.** Fill in the template fully — summary, evidence, testing, checklist.
+4. **Pass review.** Two review passes required before a human merge decision.
+5. **Human approves.** No auto-merge, ever.
 
-Task branches:
+---
 
-```
-execute/task-<N>-<slug>     
-```
-
-Human branches:
+## Branches
 
 ```
 feat/<description>
@@ -38,106 +35,106 @@ test/<description>
 style/<description>
 ```
 
-Never push directly to `main`, `master`, or `release`. Force push to protected branches is forbidden.
+Never push directly to `main`, `master`, or any `release/*` branch. Force push to protected branches is not permitted under any circumstance.
+
+---
 
 ## Commit Messages
+
+Follow [Conventional Commits](https://www.conventionalcommits.org/):
 
 ```
 <type>(<scope>): <subject>
 
-<body>
+[body]
 
-<footer>
+[footer]
 ```
 
-### Types
+**Types:** `feat` · `fix` · `docs` · `style` · `refactor` · `perf` · `test` · `chore`
 
-| Type | Use for |
-|---|---|
-| `feat` | New feature |
-| `fix` | Bug fix |
-| `docs` | Documentation only |
-| `style` | Formatting, no logic change |
-| `refactor` | Code change, no new feature or fix |
-| `perf` | Performance improvement |
-| `test` | Adding or updating tests |
-| `chore` | Maintenance, dependencies, tooling |
-
-### Subject line rules
-
-- Imperative mood — `add feature` not `added feature`
+**Subject line:**
+- Imperative mood — `add feature`, not `added feature`
 - Lowercase after the type
 - No trailing period
-- Max 50 characters
+- 50 characters max
 - What changed, not how
 
-### Body
+**Body:** Explain *why*, not what. Include when the reason is non-obvious, trade-offs exist, or the change addresses a specific subtle issue.
 
-Explain **why**, not what. Include a body when the reason is non-obvious, there are trade‑offs, or the change fixes a specific non‑obvious issue.
-
-### Breaking changes
-
-Append `!` to the type and include a `BREAKING CHANGE:` block in the footer:
+**Breaking changes:** Append `!` to the type and add a `BREAKING CHANGE:` footer:
 
 ```
 feat(api)!: require authentication on all endpoints
 
-BREAKING CHANGE: All endpoints now require authentication.
-Previously /health was public.
+BREAKING CHANGE: All endpoints now require a valid Authorization header.
+Previously /health was unauthenticated.
 
-Migration: add Authorization header to all requests.
-See MIGRATION.md for full steps.
+See MIGRATION.md for upgrade steps.
 ```
 
-## Verification Evidence
+---
 
-Passing tests is not sufficient evidence that an implementation works.
+## Before Opening a PR
 
-Before opening a PR:
+Passing tests alone is not sufficient. You must observe actual output:
 
-- Observe actual output: CLI output, API responses, rendered UI, screenshots
-- Evidence goes in the PR Testing section — commands run, outputs observed, screenshots
-- The verified commit SHA and file manifest must match what is in the PR.
+- Run the thing. See it work.
+- Capture evidence: CLI output, API responses, screenshots, logs.
+- Include that evidence in the PR Testing section.
 
-## Review Gates
+If you cannot show it working, the PR will not be reviewed.
 
-Every PR requires two automated review passes before a human merge decision:
+---
 
-1. **Spec compliance** — verifies the implementation matches what was agreed. Must return PASS.
-2. **Code quality** — checks correctness, security surface, quality. Must return PASS or CONCERNS explicitly acknowledged by a human.
+## Review
 
-No PR merges without human approval. Auto‑merge is disabled.
+Every PR goes through two review passes:
+
+1. **Spec review** — does the implementation match what was agreed in the issue? Must pass.
+2. **Code review** — correctness, security surface, quality. Must pass, or concerns must be explicitly acknowledged before merge.
+
+Both reviews must complete before a human merge decision is made.
+
+---
 
 ## CHANGELOG
 
-Every PR that changes behaviour must include a CHANGELOG entry under `[Unreleased]`:
+Every PR that changes behaviour must include an entry under `[Unreleased]`:
 
 ```markdown
 ## [Unreleased]
 
 ### Added
-- Description of new thing (#PR)
+- What was added (#PR)
 
 ### Changed
-- Description of change (#PR)
+- What changed (#PR)
 
 ### Fixed
-- Description of fix (#PR)
+- What was fixed (#PR)
 
 ### Breaking Changes
-- Description of break and migration path (#PR)
+- What broke and how to migrate (#PR)
 ```
+
+---
 
 ## What Gets Merged
 
-- Code that solves a real problem, clearly
-- Implementations that are correct, not just functional
-- PRs with observable evidence that the implementation works
-- Changes that respect existing architecture and conventions
-- Full compliance with the contribution flow
+- Code that solves a real problem, clearly.
+- Implementations that are correct, not just functional.
+- PRs with observable evidence that the change works.
+- Changes that respect existing architecture and conventions.
 
-## What does not get merged
+## What Does Not Get Merged
 
-Half‑finished work, implementations the submitter cannot explain, PRs without verification evidence, anything that skips the verify gate, or changes made after verify passed.
+- Half-finished work.
+- Implementations the submitter cannot explain.
+- PRs without evidence.
+- Anything that skips the review process.
+- Changes made after review passed.
+
+---
 
 Maintainer: [@elb-pr](https://github.com/elb-pr)
