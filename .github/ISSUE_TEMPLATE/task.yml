@@ -2,31 +2,31 @@ name: Task
 description: A unit of work to be done
 labels: []
 body:
-  - type: textarea
-    id: what
-    attributes:
-      label: What
-      description: What needs to be built or changed?
-    validations:
-      required: true
-  - type: textarea
-    id: scope
-    attributes:
-      label: Scope
-      description: What is explicitly in and out of scope?
-    validations:
-      required: true
-  - type: textarea
-    id: success
-    attributes:
-      label: Success criteria
-      description: How will we know this is done?
-    validations:
-      required: true
-  - type: textarea
-    id: dependencies
-    attributes:
-      label: Dependencies
-      description: Anything that must be done first?
-    validations:
-      required: false
+- type: textarea
+  id: what
+  attributes:
+    label: What
+    description: What needs to be built or changed?
+  validations:
+    required: true
+- type: textarea
+  id: scope
+  attributes:
+    label: Scope
+    description: What is explicitly in and out of scope?
+  validations:
+    required: true
+- type: textarea
+  id: success
+  attributes:
+    label: Success criteria
+    description: How will we know this is done?
+  validations:
+    required: true
+- type: textarea
+  id: dependencies
+  attributes:
+    label: Dependencies
+    description: Anything that must be done first?
+  validations:
+    required: false
