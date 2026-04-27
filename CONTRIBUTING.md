@@ -101,7 +101,7 @@ No PR merges without human approval. Auto-merge is disabled.
 
 ## CHANGELOG
 
-See changelog.md
+See CHANGELOG.md
 
 ## What Gets Merged
 
