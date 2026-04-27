@@ -12,20 +12,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - Initial release
 
-### Changed
-
-### Deprecated
-
-### Removed
-
-### Fixed
-
-### Security
-
 ## Version Bump Rules
 
 | Change Type | Bump | Example |
-|-------------|------|---------|
+|-------------|------|----------|
 | Breaking changes | MAJOR | 1.x.x → 2.0.0 |
 | New features | MINOR | 1.1.x → 1.2.0 |
 | Bug fixes only | PATCH | 1.1.1 → 1.1.2 |
