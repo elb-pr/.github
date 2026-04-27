@@ -1,57 +1,60 @@
 # Contributing
 
-Contributions are welcome. This document explains what is expected.
+Contributions are welcome. This document describes the full process expected of every contributor — human or agent.
+
+---
 
 ## Code Quality Standard
 
-All contributed code must meet one of the following criteria:
+**Human-written:** Code you wrote, understand fully, and can defend line by line.
 
-**Human-written:** Code you wrote yourself, understand fully, and can explain line by line.
-
-**AI-assisted, high quality:** Code produced with AI assistance is acceptable if:
-- You have reviewed every line and understand what it does
-- It is not a naive or default implementation — it solves the problem well
-- You can defend every decision if asked
-- It does not introduce unnecessary complexity, cargo-culted patterns, or placeholder logic dressed as a real implementation
-
-Vibe-coded submissions — code generated and submitted without genuine understanding or review — will be closed without merge.
+**AI-assisted:** Acceptable if you have reviewed every line, understand what it does, it is not a naive or default implementation, and you can defend every decision if asked. Vibe-coded submissions — generated and submitted without genuine review — will be closed without merge.
 
 This is not about whether AI was used. It is about whether the person submitting understands and stands behind what they are submitting.
 
-## Implementation Standard
+---
 
-Passing tests is not sufficient evidence that an implementation works. Before submitting:
+## The Contribution Flow
 
-- Run your code and observe actual output — CLI output, API responses, rendered UI
-- If tests pass but you have not seen the thing work end-to-end, it is not ready
-- Submissions that rely solely on test results as proof of correctness will be asked to provide evidence before merge
+Every non-trivial change follows this sequence. No shortcuts.
 
-Include that evidence in the Testing section of the PR template: commands run, outputs observed, screenshots where applicable.
+```
+outline → execute → verify → ship
+```
 
-## Process
+1. **Outline** — Open an issue or discussion first. Agree on approach before writing code. For agents: produce a plan using `claudikins-kernel:outline`. Plan format defines tasks; tasks become branches.
+2. **Execute** — One task = one branch. Branches are created via `claudikins-kernel:execute`. Two-stage review (spec reviewer then code reviewer) runs before any merge is offered.
+3. **Verify** — Run `claudikins-kernel:verify`. All phases must PASS. A `verify-state.json` is produced containing the verified commit SHA and file manifest hash. This is the gate.
+4. **Ship** — Run `claudikins-kernel:ship`. The ship command enforces that verify ran, that code has not changed since verification, and that a human approves the final merge. No auto-merging.
 
-1. Open an issue first if the change is non-trivial — agree on the approach before writing code
-2. Fork the repository and create a branch using the naming convention below
-3. Write your changes
-4. Open a pull request using the provided template — fill it out completely
-5. Be prepared to discuss the implementation
+---
 
 ## Branch Naming
 
+Task branches (agent-created):
+
 ```
-feat/<description>      new feature
-fix/<description>       bug fix
-chore/<description>     maintenance, dependencies, tooling
-docs/<description>      documentation only
-refactor/<description>  restructuring without behaviour change
-perf/<description>      performance improvement
-test/<description>      tests only
-style/<description>     formatting, no logic change
+execute/task-<N>-<slug>     e.g. execute/task-3-add-jwt-refresh
 ```
+
+Human branches:
+
+```
+feat/<description>
+fix/<description>
+chore/<description>
+docs/<description>
+refactor/<description>
+perf/<description>
+test/<description>
+style/<description>
+```
+
+Never push directly to `main`, `master`, or `release`. Force push to protected branches is forbidden.
+
+---
 
 ## Commit Messages
-
-Format:
 
 ```
 <type>(<scope>): <subject>
@@ -64,74 +67,116 @@ Format:
 ### Types
 
 | Type | Use for |
-|------|---------|
+|---|---|
 | `feat` | New feature |
 | `fix` | Bug fix |
 | `docs` | Documentation only |
-| `style` | Formatting, no code change |
+| `style` | Formatting, no logic change |
 | `refactor` | Code change, no new feature or fix |
 | `perf` | Performance improvement |
 | `test` | Adding or updating tests |
-| `chore` | Maintenance, dependencies |
+| `chore` | Maintenance, dependencies, tooling |
 
 ### Subject line rules
 
-- Imperative mood — "add feature" not "added feature"
-- Lowercase after the type — `feat(auth): add JWT middleware` not `feat(auth): Add JWT middleware`
+- Imperative mood — `add feature` not `added feature`
+- Lowercase after the type
 - No trailing period
 - Max 50 characters
-- Describe what changed, not how
+- What changed, not how
 
 ### Body
 
-Explain **why** the change was made. The diff shows what changed. The body explains the reasoning, trade-offs, or context that the diff cannot.
-
-Include a body when:
-- The reason for the change is not obvious
-- There are trade-offs worth noting
-- The change fixes a specific non-obvious issue
-
-Skip the body for self-explanatory changes, dependency updates, and formatting fixes.
-
-### Footer
-
-Reference issues:
-
-```
-Closes #123       closes the issue when merged
-Fixes #456        for bug fixes
-Relates to #789   related but does not close
-```
+Explain **why**, not what. The diff shows what. Include a body when the reason is non-obvious, there are trade-offs, or the change fixes a specific non-obvious issue. Skip for self-explanatory changes, dependency updates, and formatting fixes.
 
 ### Breaking changes
 
-Append `!` to the type and include a `BREAKING CHANGE:` block in the footer with a migration path:
+Append `!` to the type and include a `BREAKING CHANGE:` block in the footer:
 
 ```
-feat(api)!: require authentication for all endpoints
+feat(api)!: require authentication on all endpoints
 
-BREAKING CHANGE: All API endpoints now require authentication.
-Previously, /health and /version were public.
+BREAKING CHANGE: All endpoints now require authentication.
+Previously /health was public.
 
-Migration:
-1. No action needed for authenticated clients
-2. Service monitors must add auth headers
-3. Use /ping for unauthenticated health checks
+Migration: add Authorization header to all requests.
+See MIGRATION.md for full steps.
+```
+
+Breaking changes also require: MAJOR version bump, `### Breaking Changes` section in CHANGELOG, and a `MIGRATION.md`.
+
+### Issue references
+
+```
+Closes #123
+Fixes #456
+Relates to #789
 ```
 
 ### AI attribution
-
-If AI tooling assisted in writing the code, include co-author attribution in the commit:
 
 ```
 Co-Authored-By: Claude <noreply@anthropic.com>
 ```
 
+---
+
+## Verification Evidence
+
+Passing tests is not sufficient evidence that an implementation works.
+
+Before opening a PR:
+
+- Run `claudikins-kernel:verify` — all phases (tests, lint, types, build, output verification) must PASS
+- Observe actual output: CLI output, API responses, rendered UI, screenshots
+- Evidence goes in the PR Testing section — commands run, outputs observed, screenshots
+- The verified commit SHA and file manifest must match what is in the PR. Any change after verification means re-running verify
+
+Submissions that rely solely on test results as proof will be asked for evidence before merge.
+
+---
+
+## Review Gates
+
+Every PR requires two automated review passes before a human merge decision:
+
+1. **Spec reviewer** — verifies the implementation matches what was agreed. Must return PASS.
+2. **Code reviewer** — checks correctness, security surface, quality. Must return PASS or CONCERNS explicitly acknowledged by a human.
+
+No PR merges without human approval. Auto-merge is disabled.
+
+---
+
+## CHANGELOG
+
+Every PR that changes behaviour must include a CHANGELOG entry under `[Unreleased]` following [Keep a Changelog](https://keepachangelog.com) format:
+
+```markdown
+## [Unreleased]
+
+### Added
+- Description of new thing (#PR)
+
+### Changed
+- Description of change (#PR)
+
+### Fixed
+- Description of fix (#PR)
+
+### Breaking Changes
+- Description of break and migration path (#PR)
+```
+
+Do not leave the changelog for later. It is part of shipping, not an afterthought.
+
+---
+
 ## What Gets Merged
 
-- Code that solves a real problem clearly
+- Code that solves a real problem, clearly
 - Implementations that are correct, not just functional
-- Changes that respect the existing architecture and conventions of the project
-- PRs with evidence that the implementation actually works
+- PRs with observable evidence that the implementation works
+- Changes that respect existing architecture and conventions
+- Full compliance with the `outline → execute → verify → ship` flow
 
-What does not get merged: half-finished work, low-effort ports of existing solutions, implementations the submitter cannot explain, or PRs without observable evidence of correctness.
+**What does not get merged:** half-finished work, implementations the submitter cannot explain, PRs without verification evidence, anything that skips the verify gate, or changes made after verify passed.
