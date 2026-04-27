@@ -21,9 +21,22 @@ body:
   attributes:
     label: Steps to reproduce
     placeholder: |
-      1. 
-      2. 
-      3. 
+      1.
+      2.
+      3.
+  validations:
+    required: true
+- type: textarea
+  id: evidence
+  attributes:
+    label: Evidence
+    description: >
+      Paste the exact command you ran and its full output verbatim.
+      A description without evidence has zero diagnostic value.
+    placeholder: |
+      $ <command you ran>
+
+      <full output pasted here>
   validations:
     required: true
 - type: textarea
