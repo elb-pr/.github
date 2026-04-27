@@ -2,39 +2,27 @@
 
 Contributions are welcome. This document describes the full process expected of every contributor — human or agent.
 
----
-
 ## Code Quality Standard
 
-**Human-written:** Code you wrote, understand fully, and can defend line by line.
+Code you write, understand fully, and can defend line by line.
 
-**AI-assisted:** Acceptable if you have reviewed every line, understand what it does, it is not a naive or default implementation, and you can defend every decision if asked. Vibe-coded submissions — generated and submitted without genuine review — will be closed without merge.
-
-This is not about whether AI was used. It is about whether the person submitting understands and stands behind what they are submitting.
-
----
+Acceptable if you have reviewed every line, understand what it does, it is not a naive or default implementation, and you can defend every decision if asked.
 
 ## The Contribution Flow
 
 Every non-trivial change follows this sequence. No shortcuts.
 
-```
-outline → execute → verify → ship
-```
-
-1. **Outline** — Open an issue or discussion first. Agree on approach before writing code. For agents: produce a plan using `claudikins-kernel:outline`. Plan format defines tasks; tasks become branches.
-2. **Execute** — One task = one branch. Branches are created via `claudikins-kernel:execute`. Two-stage review (spec reviewer then code reviewer) runs before any merge is offered.
-3. **Verify** — Run `claudikins-kernel:verify`. All phases must PASS. A `verify-state.json` is produced containing the verified commit SHA and file manifest hash. This is the gate.
-4. **Ship** — Run `claudikins-kernel:ship`. The ship command enforces that verify ran, that code has not changed since verification, and that a human approves the final merge. No auto-merging.
-
----
+1. **Outline** — Open an issue or discussion first. Agree on approach before writing code. 
+2. **Execute** — One task = one branch. Two-stage review runs before any merge is offered.
+3. **Verify** — All phases must PASS. A verified commit SHA and file manifest are produced.
+4. **Ship** — The final gate. Human approves merge. No auto-merging.
 
 ## Branch Naming
 
-Task branches (agent-created):
+Task branches:
 
 ```
-execute/task-<N>-<slug>     e.g. execute/task-3-add-jwt-refresh
+execute/task-<N>-<slug>     
 ```
 
 Human branches:
@@ -51,8 +39,6 @@ style/<description>
 ```
 
 Never push directly to `main`, `master`, or `release`. Force push to protected branches is forbidden.
-
----
 
 ## Commit Messages
 
@@ -87,7 +73,7 @@ Never push directly to `main`, `master`, or `release`. Force push to protected b
 
 ### Body
 
-Explain **why**, not what. The diff shows what. Include a body when the reason is non-obvious, there are trade-offs, or the change fixes a specific non-obvious issue. Skip for self-explanatory changes, dependency updates, and formatting fixes.
+Explain **why**, not what. Include a body when the reason is non-obvious, there are trade‑offs, or the change fixes a specific non‑obvious issue.
 
 ### Breaking changes
 
@@ -103,53 +89,28 @@ Migration: add Authorization header to all requests.
 See MIGRATION.md for full steps.
 ```
 
-Breaking changes also require: MAJOR version bump, `### Breaking Changes` section in CHANGELOG, and a `MIGRATION.md`.
-
-### Issue references
-
-```
-Closes #123
-Fixes #456
-Relates to #789
-```
-
-### AI attribution
-
-```
-Co-Authored-By: Claude <noreply@anthropic.com>
-```
-
----
-
 ## Verification Evidence
 
 Passing tests is not sufficient evidence that an implementation works.
 
 Before opening a PR:
 
-- Run `claudikins-kernel:verify` — all phases (tests, lint, types, build, output verification) must PASS
 - Observe actual output: CLI output, API responses, rendered UI, screenshots
 - Evidence goes in the PR Testing section — commands run, outputs observed, screenshots
-- The verified commit SHA and file manifest must match what is in the PR. Any change after verification means re-running verify
-
-Submissions that rely solely on test results as proof will be asked for evidence before merge.
-
----
+- The verified commit SHA and file manifest must match what is in the PR.
 
 ## Review Gates
 
 Every PR requires two automated review passes before a human merge decision:
 
-1. **Spec reviewer** — verifies the implementation matches what was agreed. Must return PASS.
-2. **Code reviewer** — checks correctness, security surface, quality. Must return PASS or CONCERNS explicitly acknowledged by a human.
+1. **Spec compliance** — verifies the implementation matches what was agreed. Must return PASS.
+2. **Code quality** — checks correctness, security surface, quality. Must return PASS or CONCERNS explicitly acknowledged by a human.
 
-No PR merges without human approval. Auto-merge is disabled.
-
----
+No PR merges without human approval. Auto‑merge is disabled.
 
 ## CHANGELOG
 
-Every PR that changes behaviour must include a CHANGELOG entry under `[Unreleased]` following [Keep a Changelog](https://keepachangelog.com) format:
+Every PR that changes behaviour must include a CHANGELOG entry under `[Unreleased]`:
 
 ```markdown
 ## [Unreleased]
@@ -167,16 +128,16 @@ Every PR that changes behaviour must include a CHANGELOG entry under `[Unrelease
 - Description of break and migration path (#PR)
 ```
 
-Do not leave the changelog for later. It is part of shipping, not an afterthought.
-
----
-
 ## What Gets Merged
 
 - Code that solves a real problem, clearly
 - Implementations that are correct, not just functional
 - PRs with observable evidence that the implementation works
 - Changes that respect existing architecture and conventions
-- Full compliance with the `outline → execute → verify → ship` flow
+- Full compliance with the contribution flow
 
-**What does not get merged:** half-finished work, implementations the submitter cannot explain, PRs without verification evidence, anything that skips the verify gate, or changes made after verify passed.
+## What does not get merged
+
+Half‑finished work, implementations the submitter cannot explain, PRs without verification evidence, anything that skips the verify gate, or changes made after verify passed.
+
+Maintainer: [@elb-pr](https://github.com/elb-pr)
