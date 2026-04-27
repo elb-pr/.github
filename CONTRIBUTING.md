@@ -1,6 +1,6 @@
 # Contributing
 
-Contributions are welcome. This document describes the full process expected of every contributor wether uman or agent.
+Contributions are welcome. This document describes the full process expected of every contributor whether human or agent.
 
 ## Code Quality Standard
 
@@ -8,13 +8,12 @@ Code you write, understand fully, and can defend line by line.
 
 Acceptable if you have reviewed every line, understand what it does, it is not a naive or default implementation, and you can defend every decision if asked.
 
-
 ## Branch Naming
 
 Task branches:
 
 ```
-task-<N>-<slug>     
+task-<N>-<slug>
 ```
 
 Human branches:
@@ -65,7 +64,7 @@ Never push directly to `main`, `master`, or `release`. Force push to protected b
 
 ### Body
 
-Explain **why**, not what. Include a body when the reason is non-obvious, there are trade‑offs, or the change fixes a specific non‑obvious issue.
+Explain **why**, not what. Include a body when the reason is non-obvious, there are trade-offs, or the change fixes a specific non-obvious issue.
 
 ### Breaking changes
 
@@ -89,7 +88,7 @@ Before opening a PR:
 
 - Observe actual output: CLI output, API responses, rendered UI, screenshots
 - Evidence goes in the PR Testing section — commands run, outputs observed, screenshots
-- The verified commit SHA and file manifest must match what is in the PR.
+- The verified commit SHA and file manifest must match what is in the PR
 
 ## Review Gates
 
@@ -98,7 +97,7 @@ Every PR requires two automated review passes before a human merge decision:
 1. **Spec compliance** — verifies the implementation matches what was agreed. Must return PASS.
 2. **Code quality** — checks correctness, security surface, quality. Must return PASS or CONCERNS explicitly acknowledged by a human.
 
-No PR merges without human approval. Auto‑merge is disabled.
+No PR merges without human approval. Auto-merge is disabled.
 
 ## CHANGELOG
 
@@ -126,9 +125,11 @@ Every PR that changes behaviour must include a CHANGELOG entry under `[Unrelease
 - Implementations that are correct, not just functional
 - PRs with observable evidence that the implementation works
 - Changes that respect existing architecture and conventions
-- Full compliance with the contribution flow
+- Full compliance with the contributing document
 
-## What does not get merged
+## What Does Not Get Merged
 
-Half‑finished work, implementations the submitter cannot explain, PRs without verification evidence.
+Half-finished work, implementations the submitter cannot explain, PRs without verification evidence.
+
 Maintainer: [@elb-pr](https://github.com/elb-pr)
+
