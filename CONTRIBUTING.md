@@ -95,29 +95,13 @@ Before opening a PR:
 Every PR requires two automated review passes before a human merge decision:
 
 1. **Spec compliance** — verifies the implementation matches what was agreed. Must return PASS.
-2. **Code quality** — checks correctness, security surface, quality. Must return PASS or CONCERNS explicitly acknowledged by a human.
+2. **Code quality** — check correctness, security surface, quality. Must return PASS or CONCERNS explicitly acknowledged by a human.
 
 No PR merges without human approval. Auto-merge is disabled.
 
 ## CHANGELOG
 
-Every PR that changes behaviour must include a CHANGELOG entry under `[Unreleased]`:
-
-```markdown
-## [Unreleased]
-
-### Added
-- Description of new thing (#PR)
-
-### Changed
-- Description of change (#PR)
-
-### Fixed
-- Description of fix (#PR)
-
-### Breaking Changes
-- Description of break and migration path (#PR)
-```
+See changelog.md
 
 ## What Gets Merged
 
